@@ -21,7 +21,7 @@ export class Player {
     } else if (square === false) {
       return false;
     } else {
-      return square.ship[square.section];
+      return !square.ship.isHit(square.section);
     }
   }
 }

@@ -1,10 +1,18 @@
 export class GameController {
-  constructor({ player, computer, pgRenderer, cgRenderer, mainRenderer }) {
+  constructor({
+    player,
+    computer,
+    pgRenderer,
+    cgRenderer,
+    mainRenderer,
+    observer,
+  }) {
     this.player = player;
     this.computer = computer;
     this.pgRenderer = pgRenderer;
     this.cgRenderer = cgRenderer;
     this.mainRenderer = mainRenderer;
+    this.observer = observer;
   }
 
   setUpGame() {}
@@ -12,9 +20,14 @@ export class GameController {
   runGame() {
     let interval;
     this.#renderAll();
+
     interval = setInterval(() => {
       this.#checkWin(interval);
-    }, 1000);
+      if (!this.#gameOver && !this.observer.playerTurn) {
+        this.computer.takeTurn();
+        this.#renderAll();
+      }
+    }, 500);
   }
 
   #checkWin(interval) {
@@ -25,8 +38,8 @@ export class GameController {
   }
 
   #renderAll() {
-    this.pgRenderer.renderBoard(this.#playerGrid, 'playerGrid');
-    this.cgRenderer.renderBoard(this.#computerGrid, 'computerGrid');
+    this.pgRenderer.renderBoard(this.#computerGrid, 'playerGrid');
+    this.cgRenderer.renderBoard(this.#playerGrid, 'computerGrid');
   }
 
   get #gameOver() {

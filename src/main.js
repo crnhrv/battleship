@@ -4,22 +4,24 @@ import { Computer } from './classes/computer.js';
 import { Gameboard } from './classes/gameboard.js';
 import { Renderer } from './classes/renderer.js';
 import { SHIPS } from './constants/ships.js';
+import { Observer } from './classes/observer.js';
 
 const initializeGame = (
   shipPlacement,
   mainRenderer,
-  playerBoard = new Gameboard(),
-  randomPlacement
+  playerBoard,
+  randomPlacement,
+  observer
 ) => {
+  if (!randomPlacement) playerBoard = new Gameboard(observer);
   const player_gb = playerBoard;
-  const computer_gb = new Gameboard();
-
+  const computer_gb = new Gameboard(observer);
   if (!randomPlacement) {
     player_gb.createShips(shipPlacement);
   }
   computer_gb.createRandomGrid();
-  const computer = new Computer({ gameboard: computer_gb });
-  const player = new Player({ gameboard: player_gb });
+  const computer = new Computer({ gameboard: player_gb });
+  const player = new Player({ gameboard: computer_gb });
 
   const cgRenderer = new Renderer({
     entryPoint: document.getElementById('cGrid'),
@@ -37,6 +39,7 @@ const initializeGame = (
     cgRenderer,
     pgRenderer,
     mainRenderer,
+    observer,
   });
 
   battleships.runGame();
@@ -45,7 +48,8 @@ const initializeGame = (
 const preGameSetup = (randomPlacement = false) => {
   const startBtn = document.getElementById('startBtn');
   const resetBtn = document.getElementById('resetBtn');
-  const setupBoard = new Gameboard();
+  const observer = new Observer();
+  const setupBoard = new Gameboard(observer);
   if (randomPlacement) {
     setupBoard.createRandomGrid();
     startBtn.style.display = 'block';
@@ -68,7 +72,8 @@ const preGameSetup = (randomPlacement = false) => {
       mainRenderer.shipPlacement,
       mainRenderer,
       setupBoard,
-      randomPlacement
+      randomPlacement,
+      observer
     );
   });
 };

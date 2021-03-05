@@ -1,6 +1,7 @@
 export class Renderer {
   constructor({ entryPoint, gameboard = null, listeners = true }) {
     this.entryPoint = entryPoint;
+    this.textEntry = document.querySelector('.gameInfo');
     this.gameboard = gameboard;
     this.shipPlacement = {};
     this.elements = [];
@@ -25,13 +26,16 @@ export class Renderer {
     this.elements.forEach((ele) => this.entryPoint.appendChild(ele));
   }
 
+  renderName(playerTurn) {
+    this.textEntry.textContent = playerTurn ? 'Player Turn' : 'Computer Turn';
+  }
+
   #reset() {
     this.entryPoint.innerHTML = '';
   }
 
   gameOver(winner) {
-    const goEntry = document.getElementById('gameOver');
-    goEntry.textContent = `${winner.name} wins!`;
+    this.textEntry.textContent = `${winner.name} wins!`;
   }
 
   createBoard(board, type) {
@@ -127,7 +131,6 @@ export class Renderer {
             } else {
               ele.classList.add('mishit');
             }
-            console.log('ss');
           },
           { once: true }
         );

@@ -2,10 +2,11 @@ import { Ship } from './ship.js';
 import { SHIPS } from '../constants/ships.js';
 
 export class Gameboard {
-  constructor() {
+  constructor(observer) {
     this.grid;
     this.ships = [];
     this.#createGrid();
+    this.observer = observer;
   }
 
   createShips(shipData) {
@@ -28,7 +29,6 @@ export class Gameboard {
         const coordinates = [row, col];
         this.addShip({ length, direction, coordinates, id });
       }
-      console.log(this.grid);
     });
   }
 
@@ -83,6 +83,7 @@ export class Gameboard {
   receiveAttack({ coordinates }) {
     const [row, col] = coordinates;
     const cell = this.grid[row][col];
+    this.observer.change();
     if (!cell) {
       this.grid[row][col] = false;
       return false;

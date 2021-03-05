@@ -31,6 +31,12 @@ body {
   gap: 4em;
 }
 
+.gameInfo {
+  color: rgba(55, 125, 255, 0.664);
+  text-align: center;
+  margin: 1em;
+}
+
 .pre-grid,
 #pGrid,
 #cGrid {
@@ -94,6 +100,10 @@ body {
 
 .mishit {
   background-color: rgba(56, 53, 53, 0.527);
+}
+
+#pGrid .mishit::after {
+  font-size: 1rem;
 }
 
 .mishit::after {

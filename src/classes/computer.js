@@ -11,6 +11,7 @@ export class Computer extends Player {
 
   takeTurn() {
     const coordinates = this.#pickValidCoords();
+
     if (this.gameboard.receiveAttack({ coordinates })) {
       this.previous_move = coordinates;
       this.lastAttackHit = true;
