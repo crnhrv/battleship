@@ -1,0 +1,163 @@
+:root {
+  --cell-size: 60px;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.911);
+}
+
+.pre-grid-wrapper {
+  display: grid;
+  grid-template-rows: auto 150px;
+  grid-template-columns: 37% 20%;
+  grid-column-gap: 3em;
+  grid-template-areas:
+    'grid  ships'
+    'start start';
+  justify-content: center;
+}
+
+.game-grid-wrapper {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+  gap: 4em;
+}
+
+.pre-grid,
+#pGrid,
+#cGrid {
+  display: grid;
+  grid-template-columns: repeat(10, var(--cell-size));
+  grid-area: grid;
+  gap: 5px;
+  margin: 0 auto;
+  align-self: center;
+}
+
+#pGrid {
+  grid-template-columns: repeat(10, 30px);
+  margin: 0;
+  align-self: none;
+  opacity: 0.6;
+}
+
+#pGrid .cell {
+  height: 30px;
+  width: 30px;
+  border: 1px dotted rgba(0, 17, 255, 0.418);
+}
+
+#pGrid .cell:hover {
+  cursor: not-allowed;
+}
+
+#cGrid {
+  margin: 0;
+}
+
+#cGrid .cell:hover {
+  background-color: rgba(220, 20, 60, 0.623);
+  cursor: crosshair;
+}
+
+.btn {
+  display: none;
+  place-self: center;
+  margin: 0;
+  padding: 1.5rem 5rem;
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background-color: rgba(156, 0, 0, 0.644);
+  border: none;
+  color: white;
+}
+
+.reset {
+  align-self: start;
+}
+
+.cell {
+  background-color: rgb(0, 0, 0);
+  border: 1px dotted rgba(255, 0, 0, 0.418);
+  width: var(--cell-size);
+  height: var(--cell-size);
+}
+
+.mishit {
+  background-color: rgba(56, 53, 53, 0.527);
+}
+
+.mishit::after {
+  content: '✘';
+  display: grid;
+  height: 100%;
+  font-size: 2rem;
+  color: rgba(167, 151, 151, 0.418);
+  place-items: center;
+}
+
+.hit {
+  background-color: rgba(163, 9, 42, 0.52);
+}
+
+#cGrid .hit.cell:hover {
+  background-color: rgba(163, 9, 42, 0.52);
+}
+
+#cGrid .mishit.cell:hover {
+  background-color: rgba(68, 61, 61, 0.527);
+}
+
+.title {
+  font-size: 3.5rem;
+  color: #7c1616;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.ships {
+  display: grid;
+  justify-content: start;
+}
+
+.ship {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  column-gap: 3px;
+  row-gap: 5px;
+  align-content: start;
+  justify-content: start;
+  grid-auto-flow: column;
+}
+
+.part {
+  position: relative;
+  z-index: 15;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(128, 128, 128, 0.664);
+  background-color: rgba(255, 0, 0, 0.267);
+}
+
+.cell.part {
+  width: 60px;
+  height: 60px;
+}
+
+.random {
+  display: block;
+  grid-column: 1 / -1;
+}
