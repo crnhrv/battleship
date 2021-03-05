@@ -1,5 +1,5 @@
-import { Player } from '../src/player';
-import { Gameboard } from '../src/gameboard';
+import { Player } from '../src/classes/player';
+import { Gameboard } from '../src/classes/gameboard';
 
 let gameboard;
 

@@ -1,5 +1,5 @@
-import { Computer } from '../src/computer';
-import { Gameboard } from '../src/gameboard';
+import { Computer } from '../src/classes/computer';
+import { Gameboard } from '../src/classes/gameboard';
 
 let gameboard;
 

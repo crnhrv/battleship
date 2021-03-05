@@ -1,4 +1,4 @@
-import { Gameboard } from '../src/gameboard';
+import { Gameboard } from '../src/classes/gameboard';
 
 let gameboard;
 
