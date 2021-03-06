@@ -1,7 +1,7 @@
 export class Renderer {
   constructor({ entryPoint, gameboard = null, listeners = true }) {
     this.entryPoint = entryPoint;
-    this.textEntry = document.querySelector('.gameInfo');
+    this.textEntry = document.getElementById('gameInfo');
     this.gameboard = gameboard;
     this.shipPlacement = {};
     this.elements = [];
@@ -29,7 +29,7 @@ export class Renderer {
     this.textEntry.textContent = this.gameboard.observer.playerTurn
       ? "Player's Turn"
       : "Computer's Turn";
-    this.textEntry.style.fontSize = '1.7rem';
+    this.textEntry.style.fontSize = '1.5rem';
     this.textEntry.style.color = this.gameboard.observer.playerTurn
       ? 'rgba(220, 20, 60, 0.623)'
       : 'rgba(118, 141, 243, 0.8)';

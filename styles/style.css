@@ -83,7 +83,11 @@ a {
   gap: 4em;
 }
 
-.gameInfo {
+.pre-game-info {
+  font-size: 1rem;
+}
+
+.game-info {
   color: var(--primary-dark);
   text-align: center;
   width: 70%;
