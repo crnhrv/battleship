@@ -168,6 +168,9 @@ export class Renderer {
     const ship = document.getElementById(id);
     const shiplength = ship.querySelectorAll('.part').length;
     const dropzone = e.target;
+    if (this.shipPlacement[id]) {
+      dir = this.shipPlacement[id].direction;
+    }
     if (this.gameboard.isAddable(coords[0], coords[1], shiplength, dir)) {
       if (!this.shipPlacement[id]) {
         ship.addEventListener('click', () => this.#rotateShip(ship));
