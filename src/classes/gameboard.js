@@ -21,7 +21,7 @@ export class Gameboard {
       for (let i = 1; i <= ship.count; i++) {
         const id = ship.id + i;
         const length = ship.length;
-        const direction = Math.floor(Math.random() * 1) === 1 ? 'h' : 'v';
+        const direction = Math.floor(Math.random() * 2) === 1 ? 'h' : 'v';
         let [row, col] = this.generateRandomCoords();
         while (!this.isAddable(row, col, length, direction)) {
           [row, col] = this.generateRandomCoords();
@@ -74,7 +74,7 @@ export class Gameboard {
     if (!ship) {
       return;
     }
-    for (let [row, col] of ship.coords) {
+    for (let [row, col] of ship.coordinates) {
       this.grid[row][col] = null;
     }
     this.ships = this.ships.filter((ship) => ship.id !== id);
