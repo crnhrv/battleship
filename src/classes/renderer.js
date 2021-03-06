@@ -41,6 +41,10 @@ export class Renderer {
 
   gameOver(winner) {
     this.textEntry.textContent = `${winner.name} wins!`;
+    this.textEntry.style.color =
+      winner.name === 'Player'
+        ? 'rgba(163, 9, 42, 0.52)'
+        : 'rgba(0, 17, 255, 0.718)';
   }
 
   createBoard(board, type) {
