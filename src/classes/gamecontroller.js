@@ -16,21 +16,23 @@ export class GameController {
   }
 
   runGame() {
-    let gameInterval;
-    let turnInterval;
+    let boardRenderInterval;
+    let infoRenderInterval;
 
     this.#renderAll();
 
-    gameInterval = setInterval(() => {
-      this.#checkWin([gameInterval, turnInterval]);
+    boardRenderInterval = setInterval(() => {
+      this.#checkWin([boardRenderInterval, infoRenderInterval]);
       if (!this.#gameOver && !this.observer.playerTurn) {
         this.computer.takeTurn();
         this.#renderAll();
       }
     }, 1500);
 
-    turnInterval = setInterval(() => {
-      this.mainRenderer.renderName(this.observer.playerTurn);
+    infoRenderInterval = setInterval(() => {
+      this.mainRenderer.renderTurnPrompt();
+      this.pgRenderer.renderScore();
+      this.cgRenderer.renderScore();
     }, 50);
   }
 
@@ -38,7 +40,7 @@ export class GameController {
     if (this.#gameOver) {
       intervals.forEach((int) => clearInterval(int));
       this.#renderAll();
-      return this.mainRenderer.gameOver(this.#winner);
+      return this.mainRenderer.renderGameOver(this.#winner);
     }
   }
 

@@ -8,43 +8,45 @@ export class Renderer {
     this.listeners = listeners;
   }
 
-  get totalShipCount() {
-    return document.querySelectorAll('.ship').length;
-  }
-
   get allShipsSet() {
-    return this.totalShipCount === Object.keys(this.shipPlacement).length;
+    return (
+      document.querySelectorAll('.ship').length ===
+      Object.keys(this.shipPlacement).length
+    );
   }
 
   renderBoard(board, type) {
     this.#reset();
-    if (this.elements) {
-      this.elements = this.createBoard(board, type);
-    } else {
-      null;
+    const htmlBoard = this.createBoard(board, type);
+    if (type !== 'selection') {
+      const scoreDiv = this.createScoreDiv();
+      this.entryPoint.appendChild(scoreDiv);
     }
-    this.elements.forEach((ele) => this.entryPoint.appendChild(ele));
+    htmlBoard.forEach((ele) => this.entryPoint.appendChild(ele));
   }
 
-  renderName(playerTurn) {
-    this.textEntry.textContent = playerTurn
+  renderTurnPrompt() {
+    this.textEntry.textContent = this.gameboard.observer.playerTurn
       ? "Player's Turn"
       : "Computer's Turn";
-    this.textEntry.style.color = playerTurn
-      ? 'rgba(163, 9, 42, 0.52)'
-      : 'rgba(0, 17, 255, 0.718)';
+    this.textEntry.style.fontSize = '1.7rem';
+    this.textEntry.style.color = this.gameboard.observer.playerTurn
+      ? 'rgba(220, 20, 60, 0.623)'
+      : 'rgba(118, 141, 243, 0.8)';
   }
 
-  #reset() {
-    this.entryPoint.innerHTML = '';
+  renderScore() {
+    const score = this.entryPoint.querySelector('.score-text');
+    score.textContent = `${this.gameboard.sunkShipCount} Ships Sunk / ${this.gameboard.activeShipCount} Remaining`;
   }
 
-  gameOver(winner) {
+  renderGameOver(winner) {
     this.textEntry.textContent = `${winner.name} wins!`;
+    this.textEntry.style.fontSize = '2rem';
     this.textEntry.style.color =
       winner.name === 'Player'
-        ? 'rgba(163, 9, 42, 0.52)'
-        : 'rgba(0, 17, 255, 0.718)';
+        ? 'rgba(220, 20, 60, 0.623)'
+        : 'rgba(118, 141, 243, 0.8)';
   }
 
   createBoard(board, type) {
@@ -79,6 +81,15 @@ export class Renderer {
     return grid;
   }
 
+  createScoreDiv() {
+    const div = document.createElement('div');
+    const text = document.createElement('p');
+    div.classList.add('score');
+    text.classList.add('score-text');
+    div.appendChild(text);
+    return div;
+  }
+
   createShips(ships) {
     const shipsGrid = document.getElementById('ships');
 
@@ -93,6 +104,10 @@ export class Renderer {
         shipsGrid.append(shipContainer);
       }
     }
+  }
+
+  #reset() {
+    this.entryPoint.innerHTML = '';
   }
 
   #setUpShipContainer = (cnt, ship, key) => {

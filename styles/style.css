@@ -40,12 +40,29 @@ body {
 .pre-grid,
 #pGrid,
 #cGrid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(10, var(--cell-size));
   grid-area: grid;
   gap: 5px;
   margin: 0 auto;
   align-self: center;
+}
+
+.score {
+  position: absolute;
+  right: 0;
+}
+
+#pGrid .score {
+  color: rgb(118, 141, 243);
+  top: -10%;
+}
+
+#cGrid .score {
+  color: rgba(220, 20, 60, 0.623);
+  top: -7%;
+  font-size: 1.2rem;
 }
 
 #pGrid {

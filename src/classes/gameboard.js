@@ -9,6 +9,14 @@ export class Gameboard {
     this.observer = observer;
   }
 
+  get sunkShipCount() {
+    return this.ships.filter((ship) => ship.isSunk()).length;
+  }
+
+  get activeShipCount() {
+    return this.ships.filter((ship) => !ship.isSunk()).length;
+  }
+
   createShips(shipData) {
     this.#createGrid();
     Object.values(shipData).forEach((ship) => {
