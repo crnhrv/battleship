@@ -15,8 +15,6 @@ export class GameController {
     this.observer = observer;
   }
 
-  setUpGame() {}
-
   runGame() {
     let gameInterval;
     let turnInterval;
