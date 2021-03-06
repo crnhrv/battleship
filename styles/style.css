@@ -1,20 +1,32 @@
 :root {
-  --cell-size: 15px;
+  --cell-size: 0.9375rem;
   --primary-light: rgba(153, 11, 40, 0.623);
   --primary-dark: rgba(177, 9, 9, 0.486);
   --secondary-light: rgb(118, 141, 243);
   --secondary-dark: rgba(11, 18, 110, 0.815);
 }
 
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   :root {
-    --cell-size: 30px;
+    --cell-size: 1.475rem;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 750px) {
   :root {
-    --cell-size: 60px;
+    --cell-size: 1.875rem;
+  }
+}
+
+@media (min-width: 1150px) {
+  :root {
+    --cell-size: 2.375rem;
+  }
+}
+
+@media (min-width: 1700px) {
+  :root {
+    --cell-size: 3.75rem;
   }
 }
 
@@ -69,7 +81,8 @@ html {
 .gameInfo {
   color: var(--primary-dark);
   text-align: center;
-  margin-bottom: 3em;
+  width: 70%;
+  margin: 2em auto;
 }
 
 .score {
@@ -92,16 +105,23 @@ html {
 #cGrid .score {
   color: var(--primary-light);
   top: -15%;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   #cGrid .score {
-    top: -10%;
+    top: -12%;
+    font-size: 1.2rem;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 750px) {
+  #cGrid .score {
+    top: -9%;
+  }
+}
+
+@media (min-width: 1700px) {
   #cGrid .score {
     top: -7%;
   }
@@ -125,20 +145,31 @@ html {
 
 #pGrid .score {
   color: var(--secondary-light);
-  top: -25%;
+  top: -30%;
   font-size: 0.9rem;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   #pGrid .score {
-    top: -13%;
-    font-size: 1rem;
+    top: -25%;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 750px) {
   #pGrid .score {
-    top: -10%;
+    top: -15%;
+  }
+}
+
+@media (min-width: 1150px) {
+  #pGrid .score {
+    top: -12%;
+  }
+}
+
+@media (min-width: 1700px) {
+  #pGrid .score {
+    top: -9%;
   }
 }
 
@@ -241,7 +272,7 @@ html {
 }
 
 .title {
-  font-size: 3.5rem;
+  font-size: 3rem;
   color: var(--primary-dark);
   text-align: center;
   text-transform: uppercase;

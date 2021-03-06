@@ -122,17 +122,18 @@ export class Renderer {
     e.dataTransfer.setData('text/plain', e.target.id);
     const ship = e.target;
     const parts = ship.querySelectorAll('.part');
+
     parts.forEach((part) => {
-      part.style.width = '60px';
-      part.style.height = '60px';
+      part.style.width = 'var(--cell-size)';
+      part.style.height = 'var(--cell-size)';
     });
   };
 
   #placeShip(ship) {
     if (!this.shipPlacement[ship.id]) {
       ship.querySelectorAll('.part').forEach((part) => {
-        part.style.width = '30px';
-        part.style.height = '30px';
+        part.style.width = `calc(var(--cell-size) / 2)`;
+        part.style.height = `calc(var(--cell-size) / 2)`;
       });
     }
 
