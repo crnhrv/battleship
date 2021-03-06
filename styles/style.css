@@ -1,5 +1,17 @@
 :root {
-  --cell-size: 60px;
+  --cell-size: 15px;
+}
+
+@media (min-width: 600px) {
+  :root {
+    --cell-size: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --cell-size: 60px;
+  }
 }
 
 *,
@@ -10,6 +22,25 @@
 
 body {
   background-color: rgba(0, 0, 0, 0.911);
+}
+
+body,
+html {
+  font-size: 12px;
+}
+
+@media (min-width: 600px) {
+  body,
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  body,
+  html {
+    font-size: 16px;
+  }
 }
 
 .pre-grid-wrapper {
@@ -34,7 +65,12 @@ body {
 .gameInfo {
   color: rgba(160, 12, 20, 0.664);
   text-align: center;
-  margin: 1em;
+  margin-bottom: 3em;
+}
+
+.score {
+  position: absolute;
+  right: 0;
 }
 
 .pre-grid,
@@ -49,37 +85,22 @@ body {
   align-self: center;
 }
 
-.score {
-  position: absolute;
-  right: 0;
-}
-
-#pGrid .score {
-  color: rgb(118, 141, 243);
-  top: -10%;
-}
-
 #cGrid .score {
   color: rgba(220, 20, 60, 0.623);
-  top: -7%;
+  top: -15%;
   font-size: 1.2rem;
 }
 
-#pGrid {
-  grid-template-columns: repeat(10, 30px);
-  margin: 0;
-  align-self: none;
-  opacity: 0.6;
+@media (min-width: 600px) {
+  #cGrid .score {
+    top: -10%;
+  }
 }
 
-#pGrid .cell {
-  height: 30px;
-  width: 30px;
-  border: 1px dotted rgba(0, 17, 255, 0.418);
-}
-
-#pGrid .cell:hover {
-  cursor: not-allowed;
+@media (min-width: 1200px) {
+  #cGrid .score {
+    top: -7%;
+  }
 }
 
 #cGrid {
@@ -89,6 +110,42 @@ body {
 #cGrid .cell:hover {
   background-color: rgba(220, 20, 60, 0.623);
   cursor: crosshair;
+}
+
+#pGrid {
+  grid-template-columns: repeat(10, calc(var(--cell-size) / 2));
+  margin: 0;
+  align-self: none;
+  opacity: 0.6;
+}
+
+#pGrid .score {
+  color: rgb(118, 141, 243);
+  top: -25%;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 600px) {
+  #pGrid .score {
+    top: -13%;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  #pGrid .score {
+    top: -10%;
+  }
+}
+
+#pGrid .cell {
+  height: calc(var(--cell-size) / 2);
+  width: calc(var(--cell-size) / 2);
+  border: 1px dotted rgba(0, 17, 255, 0.418);
+}
+
+#pGrid .cell:hover {
+  cursor: not-allowed;
 }
 
 .btn {
@@ -117,34 +174,58 @@ body {
 
 .mishit {
   background-color: rgba(56, 53, 53, 0.527);
+  border: 1px dotted rgba(255, 0, 0, 1);
   opacity: 0.2;
 }
 
-#pGrid .mishit::after,
-#pGrid .sunk::after {
-  font-size: 1rem;
+#pGrid .mishit::after {
+  font-size: 0.5rem;
 }
 
 .mishit::after {
   content: '✘';
   display: grid;
   height: 100%;
-  font-size: 2rem;
+  font-size: 0.8rem;
   color: rgba(167, 151, 151, 0.418);
   place-items: center;
+}
+
+@media (min-width: 600px) {
+  #pGrid .mishit::after {
+    font-size: 1rem;
+  }
+
+  #cGrid .mishit::after {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  #pGrid .mishit::after {
+    font-size: 1.2rem;
+  }
+
+  #cGrid .mishit::after {
+    font-size: 2rem;
+  }
+}
+
+.sunk {
+  opacity: 0.2;
 }
 
 .hit {
   background-color: rgba(163, 9, 42, 0.52);
 }
 
-#pGrid .hit {
-  background-color: rgba(11, 18, 110, 0.815);
-}
-
 #pGrid .mishit,
 #pGrid .sunk {
   opacity: 0.6;
+}
+
+#pGrid .hit {
+  background-color: rgba(11, 18, 110, 0.815);
 }
 
 #cGrid .hit.cell:hover {
@@ -153,10 +234,6 @@ body {
 
 #cGrid .mishit.cell:hover {
   background-color: rgba(68, 61, 61, 0.527);
-}
-
-.sunk {
-  opacity: 0.2;
 }
 
 .title {
@@ -188,15 +265,16 @@ body {
 .part {
   position: relative;
   z-index: 15;
-  width: 30px;
-  height: 30px;
+
+  width: calc(var(--cell-size) / 2);
+  height: calc(var(--cell-size) / 2);
   border: 1px solid rgba(128, 128, 128, 0.664);
   background-color: rgba(255, 0, 0, 0.267);
 }
 
 .cell.part {
-  width: 60px;
-  height: 60px;
+  width: var(--cell-size);
+  height: var(--cell-size);
 }
 
 .random {
