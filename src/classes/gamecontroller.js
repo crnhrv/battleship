@@ -18,21 +18,28 @@ export class GameController {
   setUpGame() {}
 
   runGame() {
-    let interval;
+    let gameInterval;
+    let turnInterval;
+
     this.#renderAll();
 
-    interval = setInterval(() => {
-      this.#checkWin(interval);
+    gameInterval = setInterval(() => {
+      this.#checkWin([gameInterval, turnInterval]);
       if (!this.#gameOver && !this.observer.playerTurn) {
         this.computer.takeTurn();
         this.#renderAll();
       }
-    }, 500);
+    }, 1500);
+
+    turnInterval = setInterval(() => {
+      this.mainRenderer.renderName(this.observer.playerTurn);
+    }, 50);
   }
 
-  #checkWin(interval) {
+  #checkWin(intervals) {
     if (this.#gameOver) {
-      clearInterval(interval);
+      intervals.forEach((int) => clearInterval(int));
+      this.#renderAll();
       return this.mainRenderer.gameOver(this.#winner);
     }
   }

@@ -27,7 +27,12 @@ export class Renderer {
   }
 
   renderName(playerTurn) {
-    this.textEntry.textContent = playerTurn ? 'Player Turn' : 'Computer Turn';
+    this.textEntry.textContent = playerTurn
+      ? "Player's Turn"
+      : "Computer's Turn";
+    this.textEntry.style.color = playerTurn
+      ? 'rgba(163, 9, 42, 0.52)'
+      : 'rgba(0, 17, 255, 0.718)';
   }
 
   #reset() {
@@ -52,8 +57,14 @@ export class Renderer {
           );
         }
         if (boardCell === false) htmlCell.classList.add('mishit');
-        if (boardCell && boardCell.ship.isHit(boardCell.section)) {
-          htmlCell.classList.add('hit');
+        if (boardCell) {
+          if (boardCell.ship.isHit(boardCell.section)) {
+            htmlCell.classList.add('hit');
+          }
+
+          if (boardCell.ship.isSunk()) {
+            htmlCell.classList.add('sunk');
+          }
         }
         if (this.listeners) {
           this.#addListeners(htmlCell, type, [row, col]);
