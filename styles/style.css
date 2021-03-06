@@ -100,9 +100,11 @@ body {
 
 .mishit {
   background-color: rgba(56, 53, 53, 0.527);
+  opacity: 0.2;
 }
 
-#pGrid .mishit::after {
+#pGrid .mishit::after,
+#pGrid .sunk::after {
   font-size: 1rem;
 }
 
@@ -119,12 +121,25 @@ body {
   background-color: rgba(163, 9, 42, 0.52);
 }
 
+#pGrid .hit {
+  background-color: rgba(11, 18, 110, 0.815);
+}
+
+#pGrid .mishit,
+#pGrid .sunk {
+  opacity: 0.6;
+}
+
 #cGrid .hit.cell:hover {
   background-color: rgba(163, 9, 42, 0.52);
 }
 
 #cGrid .mishit.cell:hover {
   background-color: rgba(68, 61, 61, 0.527);
+}
+
+.sunk {
+  opacity: 0.2;
 }
 
 .title {
