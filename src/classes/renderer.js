@@ -125,7 +125,7 @@ export class Renderer {
     }
   }
 
-  #createSection(idx) {
+  #createSection() {
     const shipSection = document.createElement('div');
     shipSection.classList.add('part');
     return shipSection;
@@ -134,17 +134,20 @@ export class Renderer {
   #addListeners(ele, type, coordinates) {
     switch (type) {
       case 'computerGrid': {
-        ele.addEventListener(
-          'click',
-          () => {
-            if (this.gameboard.receiveAttack({ coordinates })) {
-              ele.classList.add('hit');
-            } else {
-              ele.classList.add('mishit');
-            }
-          },
-          { once: true }
-        );
+        ele.addEventListener('click', () => {
+          if (
+            !this.gameboard.observer.playerTurn ||
+            ele.classList.contains('hit') ||
+            ele.classList.contains('mishit')
+          ) {
+            return;
+          }
+          if (this.gameboard.receiveAttack({ coordinates })) {
+            ele.classList.add('hit');
+          } else {
+            ele.classList.add('mishit');
+          }
+        });
         break;
       }
       case 'selection': {
