@@ -49,7 +49,7 @@ const preGameSetup = (randomPlacement = false) => {
   const startBtn = document.getElementById('startBtn');
   const resetBtn = document.getElementById('resetBtn');
   const observer = new Observer();
-  const setupBoard = new Gameboard(observer);
+  let setupBoard = new Gameboard(observer);
   if (randomPlacement) {
     setupBoard.createRandomGrid();
     startBtn.style.display = 'block';
