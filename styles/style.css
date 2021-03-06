@@ -159,7 +159,7 @@ body {
 
 .ship {
   position: relative;
-  z-index: 5;
+  z-index: 995;
   display: grid;
   column-gap: 3px;
   row-gap: 5px;
