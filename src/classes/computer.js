@@ -3,7 +3,7 @@ import { Player } from './player.js';
 export class Computer extends Player {
   constructor({ gameboard }) {
     super({ gameboard });
-    this.difficulty = 1;
+    this.difficulty = 3;
     this.name = 'Computer';
     this.previous_move = this.gameboard.generateRandomCoords();
     this.lastAttackHit = false;
