@@ -1,3 +1,3 @@
-# Battleships
+# Battleship
 
 Classic game of Battleships made with Vanilla JS/CSS.
